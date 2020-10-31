@@ -25,6 +25,7 @@ int main(){
         printf("%.2f ", *(vetor+i) );
     }
 
+
     free(vetor);
     return 0;
 }
