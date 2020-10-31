@@ -1,30 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *apaga(int *vetor,int *n);
+float *apaga(float *vetor,int *n);
 
 int main(){
-    int *vetor,tamanho=0,i=0;
+    float *vetor;
+    int tamanho=-1,i=0;
+
+    while(tamanho < 0){
     printf("Digite o valor de n:");
     scanf("%d",&tamanho);
+    }
 
-    vetor = (int*) malloc(sizeof(int)*(tamanho+1) );
+    vetor = (float*) malloc(sizeof(float)*(tamanho+1) );
 
     for(i=0;i<tamanho;i++){
-        scanf("%d", (vetor+i) );
+        scanf("%f", (vetor+i) );
     }
 
     vetor = apaga(vetor,&tamanho);
 
+    printf("\nVetor:\n");
     for(i=0;i<tamanho;i++){
-        printf("%d ", *(vetor+i) );
+        printf("%.2f ", *(vetor+i) );
     }
 
     free(vetor);
     return 0;
 }
 
-int *apaga(int *vetor,int *n){
+float *apaga(float *vetor,int *n){
     int i=0,j=0,aux=0;
 
     for(i=0; i<*n ;i++){
@@ -48,7 +53,7 @@ int *apaga(int *vetor,int *n){
 
     }
 
-    vetor = realloc(vetor, sizeof(int)*( (*n) + 1) );
+    vetor = realloc(vetor, sizeof(float)*( (*n) + 1) );
 
-    return (int*) vetor;
+    return (float*) vetor;
 }
