@@ -14,7 +14,6 @@ typedef struct Nodo{
 }Nodo;
 
 typedef struct inicio{
-    Nodo *pLast;
     Nodo *pIni;
 }inicio;
 
@@ -33,7 +32,6 @@ int main(){
 
     int escolha=0;
     lista = criaLista();
-    lista->pIni = lista->pLast;
     for(;;){
 
         escolha = menu();
@@ -106,7 +104,6 @@ inicio* criaLista(){
     }
     
     AUX->pIni = NULL;
-    AUX->pLast = NULL;
 
     return (inicio*) AUX;
 }
