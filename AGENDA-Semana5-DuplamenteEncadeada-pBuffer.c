@@ -234,8 +234,6 @@ void adicionar(inicio *p, Nodo *AUX){
     return;
 }
 
-// TROQUEI O P QUERA O PBUFFER COM O INICIO, PARA N PRECISAR MUDAR OS OUTROS P POR INICIO NA FUNCAO, ASSIM O PBUFFER QUE É O INICIO FICA COM O 
-// ponteiro NO INICIO DAS ALOCAÇÕES
 
 void *buscar(inicio *INICIO, inicio *p){
     Nodo *Vazio;
@@ -297,8 +295,6 @@ void ordernar_nome(inicio *INICIO, inicio *p){
 
 }
 
-// TROQUEI O P QUERA O PBUFFER COM O INICIO, PARA N PRECISAR MUDAR OS OUTROS P POR INICIO NA FUNCAO, ASSIM O PBUFFER QUE É O INICIO FICA COM O 
-// ponteiro NO INICIO DAS ALOCAÇÕES
 void ordernar_telefone(inicio *INICIO, inicio *p){
 
     if (vazio(p) == 1 ){
@@ -371,10 +367,7 @@ void remover(inicio *p, Nodo *AUX){
     }
 
     // caso for o meio
-    // seta o ponteiro do último sendo o penúltimo
 
-
-    //p->pLast = p->pLast->pAnt;
     Remover = AUX->pAnt;
     Remover->pProx = AUX->pProx;
  
