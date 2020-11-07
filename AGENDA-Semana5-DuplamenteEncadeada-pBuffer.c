@@ -23,7 +23,6 @@ typedef struct inicio{
 # define opcao_AUX sizeof(int)*2 
 # define ler_string_remover (sizeof(int)*2) + (sizeof(char)*20) 
 # define dados_aux ( (sizeof(int)*2) + (sizeof(char)*20) )  + sizeof(dados) 
-//# define INICIO_AGENDA ( ( (sizeof(int)*2) + (sizeof(char)*20) ) + sizeof(dados) ) + sizeof(inicio) 
 
 Nodo *criaNodo();
 inicio* criaLista();
