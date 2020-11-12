@@ -436,7 +436,5 @@ void freeAgenda(inicio *p, inicio* INICIO){
     }
 	free(aux->pIni);
     free(p);
-    
+       
 }
-
-
