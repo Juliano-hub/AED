@@ -29,7 +29,7 @@ inicio* criaLista();
 int *menu(void *p);
 int vazio(inicio *p);
 void adicionar(inicio *p, Nodo *AUX);
-void *buscar(inicio *p, inicio *INICIO);
+Nodo *buscar(inicio *p, inicio *INICIO);
 void ordernar_nome(inicio *INICIO, inicio *p);
 void ordernar_telefone(inicio *INICIO, inicio *p);
 void remover(inicio *p, Nodo *AUX);
@@ -234,7 +234,7 @@ void adicionar(inicio *p, Nodo *AUX){
 }
 
 
-void *buscar(inicio *INICIO, inicio *p){
+Nodo *buscar(inicio *INICIO, inicio *p){
     Nodo *Vazio;
     Vazio = NULL;
 
@@ -245,7 +245,7 @@ void *buscar(inicio *INICIO, inicio *p){
     Nodo *inicio_AUX;
     char *c;
 
-    c = (char *)(INICIO + ( opcao + 1*(sizeof(char)) ) );
+    c = (char *)(INICIO + ( opcao_AUX + 1*(sizeof(char)) ) );
 
     inicio_AUX = p->pIni;
     // inicio_AUX aponta para o primeiro elemento
@@ -406,35 +406,31 @@ void printar(inicio *p){
     }
 }
 
-
 void freeAgenda(inicio *p, inicio* INICIO){
-	inicio *aux;
-
-    aux = INICIO;
+	Nodo *aux;
 
     // se não tiver alocado nada
-	if(aux->pIni == NULL  ){
+	if(INICIO->pIni == NULL  ){
         free(p);
         return;
     }
     
     // se tiver 1 Nodo só alocado
-	if(aux->pIni->pProx == NULL){		
-		free(aux->pIni);
+	if(INICIO->pIni->pProx == NULL){		
+		free(INICIO->pIni);
         free(p);
 		return;
 	}
 
     // se tiver mais de um Nodo alocado
-    aux->pIni = aux->pIni->pProx;
+    aux = INICIO->pIni;
 
-	for(aux ; aux->pIni != p->pLast; aux->pIni = aux->pIni->pProx){
-        free(aux->pIni->pAnt);
-        if(aux->pIni->pProx == NULL){
-            break;
-        }
+	for(aux ; aux != INICIO->pLast; aux = aux->pProx){
+        free(aux->pAnt);
     }
-	free(aux->pIni);
+
+	free(aux->pAnt);
+    free(aux);
     free(p);
        
 }
