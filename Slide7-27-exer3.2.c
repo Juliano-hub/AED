@@ -442,7 +442,6 @@ void Remover(Nodo **INICIO, int AUX){
             // ele vai para esquerda
 
             // return para quando for desempilhar
-            RSE( INICIO );
             return;
         }
 
