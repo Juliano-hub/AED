@@ -34,7 +34,8 @@ void add_caso1b();
 void add_caso2b();
 void add_caso3b();
 void remove_caso1();
-
+void remove_caso2();
+void remove_caso3();
 int main(){
 
     add_caso1a();
@@ -44,7 +45,8 @@ int main(){
     add_caso2b();
     add_caso3b();
     remove_caso1();
-
+    remove_caso2();
+    remove_caso3();
     return 0;
 }
 
@@ -250,7 +252,7 @@ int Balanceamento(Nodo **INICIO){
 //--------- CASOS --------------
 
 void add_caso1a(){
-        printf("\n--Caso 1a\n");
+        printf("\n----------Caso 1a\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
 
@@ -270,7 +272,7 @@ void add_caso1a(){
 }
 
 void add_caso2a(){
-        printf("\n--Caso 2a\n");
+        printf("\n----------Caso 2a\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
     AUX = CriaNodo(20);
@@ -294,7 +296,7 @@ void add_caso2a(){
     LiberaArvore(&INICIO);
 }
 void add_caso3a(){
-        printf("\n--Caso 3a\n");
+        printf("\n----------Caso 3a\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
     AUX = CriaNodo(20);
@@ -329,7 +331,7 @@ void add_caso3a(){
 }
 
 void add_caso1b(){
-        printf("\n--Caso 1b\n");
+        printf("\n----------Caso 1b\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
     AUX = CriaNodo(20);
@@ -348,7 +350,7 @@ void add_caso1b(){
 }
 
 void add_caso2b(){
-        printf("\n--Caso 2b\n");
+        printf("\n----------Caso 2b\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
     AUX = CriaNodo(20);
@@ -373,7 +375,7 @@ void add_caso2b(){
 }
 
 void add_caso3b(){
-        printf("\n--Caso 3b\n");
+        printf("\n----------Caso 3b\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
     AUX = CriaNodo(20);
@@ -407,7 +409,7 @@ void add_caso3b(){
     LiberaArvore(&INICIO);
 }
 void remove_caso1(){
-        printf("\n-- remove Caso 1\n");
+        printf("\n----------remove Caso 1\n");
     Nodo *INICIO, *AUX;
         INICIO = NULL;
     AUX = CriaNodo(2);
@@ -431,8 +433,88 @@ void remove_caso1(){
     LiberaArvore(&INICIO);
 }
 
-void Remover(Nodo **INICIO, int AUX){
+void remove_caso2(){
+        printf("\n----------remove Caso 2\n");
+    Nodo *INICIO, *AUX;
+        INICIO = NULL;
+    AUX = CriaNodo(6);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(2);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(1);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(4);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(3);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(5);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(9);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(8);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(7);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(11);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(10);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(12);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(13);
+    adicionar(&INICIO, AUX);
+
+    printarPreordem(&INICIO, 0);
+    printf("\nDepois de remover caso 2:\n");
+
+    Remover(&INICIO, 1);
+
+    printarPreordem(&INICIO, 0);
+    LiberaArvore(&INICIO);
+}
+
+void remove_caso3(){
+        printf("\n----------remove Caso 3\n");
+    Nodo *INICIO, *AUX;
+        INICIO = NULL;
+    AUX = CriaNodo(5);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(2);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(1);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(3);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(4);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(8);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(7);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(6);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(10);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(9);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(11);
+    adicionar(&INICIO, AUX);
+    AUX = CriaNodo(12);
+    adicionar(&INICIO, AUX);
+    
+    printarPreordem(&INICIO, 0);
+    printf("\nDepois de remover caso 3:\n");
+
+    Remover(&INICIO, 1);
+
+    printarPreordem(&INICIO, 0);
+    LiberaArvore(&INICIO);
+}
+
+
+void Remover(Nodo **INICIO,int AUX){
     Nodo *Reserva;
+    int BALANCEAMENTO;
 
     if( (*INICIO) != NULL){
 
@@ -442,6 +524,23 @@ void Remover(Nodo **INICIO, int AUX){
             // ele vai para esquerda
 
             // return para quando for desempilhar
+
+            BALANCEAMENTO = FB(INICIO);
+            if(BALANCEAMENTO != 0){
+                if( BALANCEAMENTO == -2 ){
+                    RSE( & (*INICIO) );
+                }if ( BALANCEAMENTO == 2 ){
+                    RSD( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == 2 && FB(&(*INICIO)->esquerda) == -1){
+                    RSD( & (*INICIO) );
+                    RSE( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == -2 && FB(&(*INICIO)->direita) == +1){
+                    RSD( & (*INICIO) );
+                    RSE( & (*INICIO) );
+                }
+            }
             return;
         }
 
@@ -449,6 +548,23 @@ void Remover(Nodo **INICIO, int AUX){
             // se o valor digitado for maior que o atual
             Remover( &( (*INICIO)->direita), AUX );
             // ele vai para direita
+
+            BALANCEAMENTO = FB(INICIO);
+            if(BALANCEAMENTO != 0){
+                if( BALANCEAMENTO == -2 ){
+                    RSD( & (*INICIO) );
+                }if ( BALANCEAMENTO == 2 ){
+                    RSE( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == 2 && FB(&(*INICIO)->direita) == -1){
+                    RSE( & (*INICIO) );
+                    RSD( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == -2 && FB(&(*INICIO)->esquerda) == +1){
+                    RSE( & (*INICIO) );
+                    RSD( & (*INICIO) );
+                }
+            }
             return;
         }
 
@@ -491,5 +607,4 @@ void Remover(Nodo **INICIO, int AUX){
         printf("Erro, numero nao encontrado");
         return;
     }
-
 }

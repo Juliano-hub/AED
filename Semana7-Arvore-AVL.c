@@ -12,7 +12,7 @@ typedef struct Nodo{
 }Nodo;
 
 Nodo *CriaNodo();
-void adicionar(Nodo **INICIO, Nodo *AUX);
+int adicionar(Nodo **INICIO, Nodo *AUX);
 int menu();
 void printarPreordem(Nodo **INICIO, int contadorEspaco);
 Nodo *buscar(Nodo **INICIO, int AUX);
@@ -71,7 +71,6 @@ int main(){
                         printf("Dado encontrado: %d\n", AUX->dado.valor);
                     }
                 }
-
             break;
 
             case 4:
@@ -130,7 +129,7 @@ Nodo *CriaNodo(){
     return (Nodo*) AUX;
 }
 
-void adicionar(Nodo **INICIO, Nodo *AUX){
+int adicionar(Nodo **INICIO, Nodo *AUX){
 
     if(*INICIO == NULL){
         // se inicio for igual a NULL, significa que achou um local vago
@@ -158,13 +157,14 @@ void adicionar(Nodo **INICIO, Nodo *AUX){
 
         // ele vai para direita
     }else{
-        printf("\nValor ja existente na arvore!\n");
+        printf("\nTentou inserir um valor repitido!\n");
+        free(AUX);
     }
 
 }
-
 void Remover(Nodo **INICIO, Nodo *AUX){
     Nodo *Reserva;
+    int BALANCEAMENTO;
 
     if( (*INICIO) != NULL){
 
@@ -175,8 +175,22 @@ void Remover(Nodo **INICIO, Nodo *AUX){
 
             // return para quando for desempilhar
 
-            
-            Balanceamento( INICIO );
+            BALANCEAMENTO = FB(INICIO);
+            if(BALANCEAMENTO != 0){
+                if( BALANCEAMENTO == -2 ){
+                    RSE( & (*INICIO) );
+                }if ( BALANCEAMENTO == 2 ){
+                    RSD( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == 2 && FB(&(*INICIO)->esquerda) == -1){
+                    RSD( & (*INICIO) );
+                    RSE( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == -2 && FB(&(*INICIO)->direita) == +1){
+                    RSD( & (*INICIO) );
+                    RSE( & (*INICIO) );
+                }
+            }
             return;
         }
 
@@ -185,7 +199,22 @@ void Remover(Nodo **INICIO, Nodo *AUX){
             Remover( &( (*INICIO)->direita), AUX );
             // ele vai para direita
 
-            Balanceamento( INICIO );
+            BALANCEAMENTO = FB(INICIO);
+            if(BALANCEAMENTO != 0){
+                if( BALANCEAMENTO == -2 ){
+                    RSD( & (*INICIO) );
+                }if ( BALANCEAMENTO == 2 ){
+                    RSE( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == 2 && FB(&(*INICIO)->direita) == -1){
+                    RSE( & (*INICIO) );
+                    RSD( & (*INICIO) );
+                }
+                if( BALANCEAMENTO == -2 && FB(&(*INICIO)->esquerda) == +1){
+                    RSE( & (*INICIO) );
+                    RSD( & (*INICIO) );
+                }
+            }
             return;
         }
 
@@ -228,8 +257,6 @@ void Remover(Nodo **INICIO, Nodo *AUX){
         printf("Erro, numero nao encontrado");
         return;
     }
-
-    Balanceamento( INICIO );
 }
 
 void printarPreordem(Nodo **INICIO, int contadorEspaco){

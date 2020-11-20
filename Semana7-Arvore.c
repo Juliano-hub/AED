@@ -118,8 +118,7 @@ Nodo *CriaNodo(){
 }
 
 void adicionar(Nodo **INICIO, Nodo *AUX){
-    int i=0;
-
+    
     if(*INICIO == NULL){
         // se inicio for igual a NULL, significa que achou um local vago
         *INICIO = AUX;
