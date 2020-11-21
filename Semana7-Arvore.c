@@ -12,7 +12,7 @@ typedef struct Nodo{
 }Nodo;
 
 Nodo *CriaNodo();
-void adicionar(Nodo **INICIO, Nodo *AUX);
+int adicionar(Nodo **INICIO, Nodo *AUX);
 int menu();
 void PrintarPreordem(Nodo **INICIO);
 Nodo *buscar(Nodo **INICIO, int AUX);
@@ -33,7 +33,9 @@ int main(){
         switch(escolha){
             case 1:
                 AUX = CriaNodo();
-                adicionar(&INICIO, AUX);
+                if(AUX != NULL){
+                    adicionar(&INICIO, AUX);
+                }
             break;
 
             case 2:
@@ -105,6 +107,7 @@ Nodo *CriaNodo(){
 
     if(AUX == NULL){
         printf("\nNao foi possivel fazer o malloc!\n");
+        return (Nodo*) NULL;
     }
 
     printf("\nDigite um numero:");
@@ -117,8 +120,8 @@ Nodo *CriaNodo(){
     return (Nodo*) AUX;
 }
 
-void adicionar(Nodo **INICIO, Nodo *AUX){
-    
+int adicionar(Nodo **INICIO, Nodo *AUX){
+
     if(*INICIO == NULL){
         // se inicio for igual a NULL, significa que achou um local vago
         *INICIO = AUX;
@@ -129,6 +132,10 @@ void adicionar(Nodo **INICIO, Nodo *AUX){
     if( (*INICIO)->dado.valor > AUX->dado.valor){
         // se o valor digitado for menor que o atual
         adicionar(&( (*INICIO)->esquerda), AUX);
+
+
+        Balanceamento( INICIO  );
+
         // ele vai para esquerda
         return;
     }
@@ -136,9 +143,13 @@ void adicionar(Nodo **INICIO, Nodo *AUX){
     if( (*INICIO)->dado.valor < AUX->dado.valor){
         // se o valor digitado for maior que o atual
         adicionar( &( (*INICIO)->direita), AUX);
+
+        Balanceamento( INICIO  );
+
         // ele vai para direita
     }else{
-        printf("\nValor ja existente na arvore!\n");
+        printf("\nTentou inserir um valor repitido!\n");
+        free(AUX);
     }
 
 }

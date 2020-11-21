@@ -38,11 +38,11 @@ int main(){
     scanf("%d", &Total_nodos);
 
     for(i=0 ; i< Total_nodos ; i++){
-
                         // passa um numero aleatório entre 250 e 0 para preencher
         AUX = CriaNodo( rand()% 250 - 0 );
-        adicionar(&INICIO, AUX);
-
+        if(AUX != NULL){
+            adicionar(&INICIO, AUX);
+        }
     }
 
     printf("\nImprimindo em PREordem:\n");
@@ -63,12 +63,12 @@ int main(){
 
 Nodo *CriaNodo(int Valor){
     Nodo *AUX;
-    int num;
 
     AUX = (Nodo*) malloc(sizeof(Nodo));
 
     if(AUX == NULL){
         printf("\nNao foi possivel fazer o malloc!\n");
+        return (Nodo*) NULL;
     }
 
     AUX->dado.valor = Valor;

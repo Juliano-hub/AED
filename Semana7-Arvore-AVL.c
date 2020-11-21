@@ -40,10 +40,11 @@ int main(){
         switch(escolha){
             case 1:
                 AUX = CriaNodo();
-                adicionar(&INICIO, AUX);
+                if(AUX != NULL){
+                    adicionar(&INICIO, AUX);
+                }
 
                 malloc_primeira_vez=0;
-
             break;
 
             case 2:
@@ -117,6 +118,7 @@ Nodo *CriaNodo(){
 
     if(AUX == NULL){
         printf("\nNao foi possivel fazer o malloc!\n");
+        return (Nodo*) NULL;
     }
 
     printf("\nDigite um numero:");

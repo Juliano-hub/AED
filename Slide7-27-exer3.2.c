@@ -52,12 +52,12 @@ int main(){
 
 Nodo *CriaNodo(int Valor){
     Nodo *AUX;
-    int num;
 
     AUX = (Nodo*) malloc(sizeof(Nodo));
 
     if(AUX == NULL){
         printf("\nNao foi possivel fazer o malloc!\n");
+        return (Nodo*) NULL;
     }
 
     AUX->dado.valor = Valor;
