@@ -131,39 +131,38 @@ Nodo *CriaNodo(){
     return (Nodo*) AUX;
 }
 
-int adicionar(Nodo **INICIO, Nodo *AUX){
-
-    if(*INICIO == NULL){
-        // se inicio for igual a NULL, significa que achou um local vago
-        *INICIO = AUX;
-        // e coloca o dado lá
-        return;
+int adicionar(Nodo** INICIO,Nodo *x){
+    if (*INICIO == NULL){
+        *INICIO = x;
+        return 1;
     }
-
-    if( (*INICIO)->dado.valor > AUX->dado.valor){
-        // se o valor digitado for menor que o atual
-        adicionar(&( (*INICIO)->esquerda), AUX);
-
-
-        Balanceamento( INICIO  );
-
-        // ele vai para esquerda
-        return;
+    else if ( (*INICIO)->dado.valor > x->dado.valor ){
+        if ( adicionar( &( (*INICIO)->esquerda), x) )
+        {
+            if (Balanceamento(INICIO))
+                return 0;
+            else
+                return 1;
+        }
     }
-    
-    if( (*INICIO)->dado.valor < AUX->dado.valor){
-        // se o valor digitado for maior que o atual
-        adicionar( &( (*INICIO)->direita), AUX);
-
-        Balanceamento( INICIO  );
-
-        // ele vai para direita
-    }else{
+    else if (  (*INICIO)->dado.valor < x->dado.valor  ){
+        if ( adicionar(&(*INICIO)->direita, x) )
+        {
+            if (Balanceamento(INICIO))
+                return 0;
+            else
+                return 1;
+        }
+        else
+        return 0;
+    }
+    else{
         printf("\nTentou inserir um valor repitido!\n");
-        free(AUX);
+        free(x);
+        return 0; /* valor jah presente */
     }
-
 }
+
 void Remover(Nodo **INICIO, Nodo *AUX){
     Nodo *Reserva;
     int BALANCEAMENTO;
