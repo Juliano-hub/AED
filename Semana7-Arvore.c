@@ -12,7 +12,7 @@ typedef struct Nodo{
 }Nodo;
 
 Nodo *CriaNodo();
-int adicionar(Nodo **INICIO, Nodo *AUX);
+int adicionar(Nodo** INICIO, Nodo *x);
 int menu();
 void PrintarPreordem(Nodo **INICIO);
 Nodo *buscar(Nodo **INICIO, int AUX);

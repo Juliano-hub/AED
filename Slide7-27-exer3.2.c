@@ -13,7 +13,7 @@ typedef struct Nodo{
 }Nodo;
 
 Nodo *CriaNodo(int Valor);
-int adicionar(Nodo **INICIO, Nodo *AUX);
+int adicionar(Nodo** INICIO, Nodo *x);
 void printarPreordem(Nodo **INICIO, int contadorEspaco);
 void LiberaArvore(Nodo **INICIO);
 //-----
